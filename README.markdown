@@ -1,20 +1,16 @@
-# The Official raywenderlich.com Swift Style Guide.
+# Swift Style Guide.
 
-This style guide is different from others you may see, because the focus is centered on readability for print and the web. We created this style guide to keep the code in our books, tutorials, and starter kits nice and consistent — even though we have many different authors working on the books.
-
-Our overarching goals are conciseness, readability, and simplicity.
-
-Writing Objective-C? Check out our [Objective-C Style Guide](https://github.com/raywenderlich/objective-c-style-guide) too.
+This style guide is a work in progress aimed at readability, simplicity, and conciseness. Based on the Official raywenderlich.com Swift Style Guide.
 
 ## Table of Contents
 
-* [Language](#language)
 * [Spacing](#spacing)
 * [Comments](#comments)
 * [Naming](#naming)
   * [Class Prefixes](#class-prefixes)
 * [Semicolons](#semicolons)
 * [Classes and Structures](#classes-and-structures)
+* [Use of Self](#use-of-self)
 * [Function Declarations](#function-declarations)
 * [Closures](#closures)
 * [Types](#types)
@@ -23,36 +19,20 @@ Writing Objective-C? Check out our [Objective-C Style Guide](https://github.com/
   * [Type Inference](#type-inference)
   * [Syntactic Sugar](#syntactic-sugar)
 * [Control Flow](#control-flow)
-* [Use of Self](#use-of-self)
-* [Smiley Face](#smiley-face)
 * [Credits](#credits)
 
 
-## Language
-
-Use US English spelling to match Apple's API.
-
-**Preferred:**
-```swift
-var color = "red"
-```
-
-**Not Preferred:**
-```swift
-var colour = "red"
-```
-
 ## Spacing
 
-* Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode.
+* Indent using 4 spaces rather than tabs. 4 spaces helps keep indentation levels very clear. Be sure to set this preference in Xcode.
 * Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
 
 **Preferred:**
 ```swift
 if user.isHappy {
-  //Do something
+    //Do something
 } else {
-  //Do something else
+    //Do something else
 }
 ```
 
@@ -60,10 +40,10 @@ if user.isHappy {
 ```swift
 if user.isHappy
 {
-    //Do something
+  //Do something
 }
 else {
-    //Do something else
+  //Do something else
 }
 ```
 
@@ -86,8 +66,8 @@ Use descriptive names with camel case for classes, methods, variables, etc. Clas
 let MaximumWidgetCount = 100
 
 class WidgetContainer {
-  var widgetButton: UIButton
-  let widgetHeightPercentage = 0.85
+    var widgetButton: UIButton
+    let widgetHeightPercentage = 0.85
 }
 ```
 
@@ -97,8 +77,26 @@ class WidgetContainer {
 let MAX_WIDGET_COUNT = 100
 
 class app_widgetContainer {
-  var wBut: UIButton
-  let wHeightPct = 0.85
+    var wBut: UIButton
+    let wHeightPct = 0.85
+}
+```
+
+For enumerated types, as per Apple's recommendation, the type name should be in the singular.
+
+**Preferred:**
+
+```swift
+enum Planet {
+    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+}
+```
+
+**Not Preferred:**
+
+```swift
+enum Planets {
+    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
 }
 ```
 
@@ -149,7 +147,7 @@ If you need to expose a Swift type for use within Objective-C you can provide a 
 
 ```swift
 @objc (RWTChicken) class Chicken {
-   ...
+    ...
 }
 ```
 
@@ -219,9 +217,7 @@ The example above demonstrates the following style guidelines:
 
 ## Use of Self
 
-Avoid using `self` since Swift does not require it to access an object's properties or invoke its methods.
-
-The only reason for requiring the use of `self` is to differentiate between property names and arguments when initializing a class or structure:
+You should always use `self` to access an object's properties and invoke its methods. This will help maintain clarity about what you are referring to at the cost of a small amount of verbosity.
 
 ```swift
 class BoardLocation {
@@ -253,6 +249,27 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 }
 ```
 
+Don't specify the output type as Void. Simply leave it out.
+
+**Preferred:**
+```swift
+func reticulateSplines(spline: [Double]) {
+    // reticulate code goes here
+}
+```
+
+**Not Preferred:**
+```swift
+func reticulateSplines(spline: [Double]) -> Void {
+    // reticulate code goes here
+}
+```
+
+```swift
+func reticulateSplines(spline: [Double]) -> () {
+    // reticulate code goes here
+}
+```
 
 ## Closures
 
@@ -270,6 +287,12 @@ For single-expression closures where the context is clear, use implicit returns:
 attendeeList.sort { a, b in
   a > b
 }
+```
+
+For very simple closures, you should put them on a single line without naming the parameters:
+
+```swift
+attendeeList.sort { $0 > $1 }
 ```
 
 
@@ -301,7 +324,7 @@ Constants are defined using the `let` keyword, and variables with the `var` keyw
 
 Declare variables and function return types as optional with `?` where a nil value is acceptable.
 
-Use implicitly unwrapped types declared with `!` only for instance variables that you know will be initialized later before use, such as subviews that will be set up in `viewDidLoad`.
+Avoid using `!` whereever possible. Instead try to use `if let` to create a non-optional. If you're using `!` it should be in a conditional that ensures the variable is non-nil.
 
 When accessing an optional value, use optional chaining if the value is only accessed once or if there are many optionals in the chain:
 
@@ -309,7 +332,7 @@ When accessing an optional value, use optional chaining if the value is only acc
 myOptional?.anotherOne?.optionalView?.setNeedsDisplay()
 ```
 
-Use optional binding when it's more convenient to unwrap once and perform multiple operations:
+Use optional binding when it's more convenient to unwrap once and perform multiple operations or if you need to do any assignment:
 
 ```swift
 if let view = self.optionalView {
@@ -386,24 +409,9 @@ for var i = 0; i < attendeeList.count; i++ {
 ```
 
 
-## Smiley Face
-
-Smiley faces are a very prominent style feature of the raywenderlich.com site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket `]` is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis `)` creates a half-hearted smile, and thus is not preferred.
-
-**Preferred:**
-```
-:]
-```
-
-**Not Preferred:**
-```
-:)
-```  
-
-
 ## Credits
 
-This style guide is a collaborative effort from the most stylish raywenderlich.com team members: 
+This style guide is derived from a collaborative effort from the most stylish raywenderlich.com team members: 
 
 * [Soheil Moayedi Azarpour](https://github.com/moayes)
 * [Scott Berrevoets](https://github.com/Scott90)
