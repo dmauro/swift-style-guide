@@ -55,7 +55,6 @@ When they are needed, use comments to explain **why** a particular piece of code
 
 Avoid block comments inline with code, as the code should be as self-documenting as possible. *Exception: This does not apply to those comments used to generate documentation.*
 
-
 ## Naming
 
 Use descriptive names with camel case for classes, methods, variables, etc. Class names and constants in module scope should be capitalized, while method names and variables should start with a lower case letter.
@@ -116,19 +115,9 @@ timedAction(delay: 1.0, perform: someOtherAction)
 For methods, follow the standard Apple convention of referring to the first parameter in the method name:
 ```swift
 class Guideline {
-  func combineWithString(incoming: String, options: Dictionary?) { ... }
-  func upvoteBy(amount: Int) { ... }
+    func combineWithString(incoming: String, options: Dictionary?) { ... }
+    func upvoteBy(amount: Int) { ... }
 }
-```
-
-When referring to functions in prose (tutorials, books, comments) include the required parameter names from the caller's perspective.
-
-```
-The dateFromString() function is great.
-Call convertPointAt(column:, row:) from your init() method.
-The return value of timedAction(delay:, perform:) may be nil.
-Guideline objects only have two methods: combineWithString(options:) and upvoteBy()
-You shouldn't call the data source method tableView(cellForRowAtIndexPath:) directly.
 ```
 
 ### Class Prefixes
@@ -150,7 +139,6 @@ If you need to expose a Swift type for use within Objective-C you can provide a 
     ...
 }
 ```
-
 
 ## Semicolons
 
@@ -178,34 +166,34 @@ Here's an example of a well-styled class definition:
 
 ```swift
 class Circle: Shape {
-  var x: Int, y: Int
-  var radius: Double
-  var diameter: Double {
+    var x: Int, y: Int
+    var radius: Double
+    var diameter: Double {
     get {
-      return radius * 2
+        return radius * 2
     }
     set {
-      radius = newValue / 2
+        radius = newValue / 2
     }
-  }
+    }
 
-  init(x: Int, y: Int, radius: Double) {
-    self.x = x
-    self.y = y
-    self.radius = radius
-  }
+    init(x: Int, y: Int, radius: Double) {
+        self.x = x
+        self.y = y
+        self.radius = radius
+    }
 
-  convenience init(x: Int, y: Int, diameter: Double) {
-    self.init(x: x, y: y, radius: diameter / 2)
-  }
+    convenience init(x: Int, y: Int, diameter: Double) {
+        self.init(x: x, y: y, radius: diameter / 2)
+    }
 
-  func describe() -> String {
-    return "I am a circle at (\(x),\(y)) with an area of \(computeArea())"
-  }
+    func describe() -> String {
+        return "I am a circle at (\(x),\(y)) with an area of \(computeArea())"
+    }
 
-  func computeArea() -> Double {
-    return M_PI * radius * radius
-  }  
+    func computeArea() -> Double {
+        return M_PI * radius * radius
+    }  
 }
 ```
 
@@ -221,12 +209,16 @@ You should always use `self` to access an object's properties and invoke its met
 
 ```swift
 class BoardLocation {
-  let row: Int, column: Int
+    let row: Int, column: Int
 
-  init(row: Int,column: Int) {
-    self.row = row
-    self.column = column
-  }
+    init(row: Int, column: Int) {
+        self.row = row
+        self.column = column
+    }
+
+    func description() -> String {
+        return "Row \(self.row), column \(self.column)"
+    }
 }
 ```
 
@@ -236,7 +228,7 @@ Keep short function declarations on one line including the opening brace:
 
 ```swift
 func reticulateSplines(spline: [Double]) -> Bool {
-  // reticulate code goes here
+    // reticulate code goes here
 }
 ```
 
@@ -245,7 +237,7 @@ For functions with long signatures, add line breaks at appropriate points and ad
 ```swift
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
     translateConstant: Int, comment: String) -> Bool {
-  // reticulate code goes here
+    // reticulate code goes here
 }
 ```
 
@@ -277,7 +269,7 @@ Use trailing closure syntax wherever possible. In all cases, give the closure pa
 
 ```swift
 return SKAction.customActionWithDuration(effect.duration) { node, elapsedTime in 
-  // more code goes here
+    // more code goes here
 }
 ```
 
@@ -285,16 +277,15 @@ For single-expression closures where the context is clear, use implicit returns:
 
 ```swift
 attendeeList.sort { a, b in
-  a > b
+    a > b
 }
 ```
 
-For very simple closures, you should put them on a single line without naming the parameters:
+For very simple closures, you should put them on a single line without naming the parameters. You should include a space after the opening curly brace and before the closing brace:
 
 ```swift
 attendeeList.sort { $0 > $1 }
 ```
-
 
 ## Types
 
@@ -336,7 +327,7 @@ Use optional binding when it's more convenient to unwrap once and perform multip
 
 ```swift
 if let view = self.optionalView {
-  // do many things with view
+    // do many things with view
 }
 ```
 
@@ -360,7 +351,6 @@ var currentBounds: CGRect = computeViewBounds()
 
 **NOTE**: Following this guideline means picking descriptive names is even more important than before.
 
-
 ### Syntactic Sugar
 
 Prefer the shortcut versions of type declarations over the full generics syntax.
@@ -379,8 +369,6 @@ var employees: Dictionary<Int, String>
 var faxNumber: Optional<Int>
 ```
 
-
-
 ## Control Flow
 
 Prefer the `for-in` style of `for` loop over the `for-condition-increment` style.
@@ -388,26 +376,25 @@ Prefer the `for-in` style of `for` loop over the `for-condition-increment` style
 **Preferred:**
 ```swift
 for _ in 0..<3 {
-  println("Hello three times")
+    println("Hello three times")
 }
 
 for person in attendeeList {
-  // do something
+    // do something
 }
 ```
 
 **Not Preferred:**
 ```swift
 for var i = 0; i < 3; i++ {
-  println("Hello three times")
+    println("Hello three times")
 }
 
 for var i = 0; i < attendeeList.count; i++ {
-  let person = attendeeList[i]
-  // do something
+    let person = attendeeList[i]
+    // do something
 }
 ```
-
 
 ## Credits
 
