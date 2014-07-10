@@ -80,6 +80,8 @@ let i = 0
 let plusOne = ++i
 ```
 
+* Note: An exception is made for the range operators `...` and `..<` which should not have spaces between the operator and targets.
+
 ## Comments
 
 When they are needed, use comments to explain **why** a particular piece of code does something. Comments must be kept up-to-date or deleted.
