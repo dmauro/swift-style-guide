@@ -6,6 +6,8 @@ This style guide is a work in progress aimed at readability, simplicity, and con
 
 * [Spacing](#spacing)
 * [Comments](#comments)
+* [Numbers](#numbers)
+* [Conditionals](#conditionals)
 * [Naming](#naming)
   * [Class Prefixes](#class-prefixes)
 * [Semicolons](#semicolons)
@@ -49,11 +51,74 @@ else {
 
 * There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but having too many sections in a method often means you should refactor into several methods.
 
+Any comma separated list should have a space after each comma.
+
+```swift
+enum Planet {
+    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+}
+```
+```swift
+func describePoint(x: Int, y: Int) -> String {
+    return "I am a circle at (\(x), \(y)) with an area of \(x * y)"
+}
+```
+```swift
+let array = ["one", "two", "three"]
+```
+
+Binary and Ternary operators should include spaces between the operator(s) and targets while unary operators should not:
+
+```swift
+let four = (1 + 1) * 2
+```
+```swift
+let mood = isSunnyOut ? "happy" : "foul"
+```
+```swift
+let i = 0
+let plusOne = ++i
+```
+
 ## Comments
 
 When they are needed, use comments to explain **why** a particular piece of code does something. Comments must be kept up-to-date or deleted.
 
 Avoid block comments inline with code, as the code should be as self-documenting as possible. *Exception: This does not apply to those comments used to generate documentation.*
+
+## Numbers
+
+Parenthesis should be used when doing math to help with visual clarity even when they are not needed:
+
+```swift
+let myNumber = (3 * 5) / 2
+```
+
+Very large numbers should use an underscore after every third power for visual clarity:
+
+```swift
+let fileSize = 100_000_000
+```
+
+## Conditionals
+
+Conditionals should not use parenthesis unless needed to group statements:
+
+**Preferred:**
+```swift
+let name = "world"
+if name == "world" {
+    println("hello, world")
+}
+```
+
+**Not Preferred:**
+```swift
+let name = "world"
+if (name == "world") {
+    println("hello, world")
+}
+```
 
 ## Naming
 
@@ -188,7 +253,7 @@ class Circle: Shape {
     }
 
     func describe() -> String {
-        return "I am a circle at (\(x),\(y)) with an area of \(computeArea())"
+        return "I am a circle at (\(self.x), \(self.y)) with an area of \(self.computeArea())"
     }
 
     func computeArea() -> Double {
@@ -216,7 +281,7 @@ class BoardLocation {
         self.column = column
     }
 
-    func description() -> String {
+    func describe() -> String {
         return "Row \(self.row), column \(self.column)"
     }
 }
