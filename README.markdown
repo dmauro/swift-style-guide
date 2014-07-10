@@ -88,12 +88,6 @@ Avoid block comments inline with code, as the code should be as self-documenting
 
 ## Numbers
 
-Parenthesis should be used when doing math to help with visual clarity even when they are not needed:
-
-```swift
-let myNumber = (3 * 5) / 2
-```
-
 Very large numbers should use an underscore after every third power for visual clarity:
 
 ```swift
@@ -463,7 +457,11 @@ for var i = 0; i < attendeeList.count; i++ {
 
 ## Credits
 
-This style guide is derived from a collaborative effort from the most stylish raywenderlich.com team members: 
+This style guide has been assembled by:
+
+* [David Mauro](http://dmauro.com)
+
+And is derived from a collaborative effort from the most stylish raywenderlich.com team members: 
 
 * [Soheil Moayedi Azarpour](https://github.com/moayes)
 * [Scott Berrevoets](https://github.com/Scott90)
