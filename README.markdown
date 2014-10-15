@@ -245,11 +245,11 @@ class Circle: Shape {
     }
 
     convenience init(x: Int, y: Int, diameter: Double) {
-        self.init(x: x, y: y, radius: diameter / 2)
+        init(x: x, y: y, radius: diameter / 2)
     }
 
     func describe() -> String {
-        return "I am a circle at (\(self.x), \(self.y)) with an area of \(self.computeArea())"
+        return "I am a circle at (\(x), \(y)) with an area of \(computeArea())"
     }
 
     func computeArea() -> Double {
@@ -266,7 +266,7 @@ The example above demonstrates the following style guidelines:
 
 ## Use of Self
 
-You should always use `self` to access an object's properties and invoke its methods. This will help maintain clarity about what you are referring to at the cost of a small amount of verbosity.
+You should use `self` to access an object's properties and invoke its methods only when necessary. Let Xcode color code the properties for you to differentiate the scope of the variable. (Note: Xcode does not color code functions/methods to differentiate them so being overly verbose and using self to refer to methods should perhaps be revisited.)
 
 ```swift
 class BoardLocation {
@@ -278,7 +278,7 @@ class BoardLocation {
     }
 
     func describe() -> String {
-        return "Row \(self.row), column \(self.column)"
+        return "Row \(row), column \(column)"
     }
 }
 ```
