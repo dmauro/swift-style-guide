@@ -293,11 +293,12 @@ func reticulateSplines(spline: [Double]) -> Bool {
 }
 ```
 
-For functions with long signatures, add line breaks at appropriate points and add an extra indent on subsequent lines:
+For functions with long signatures, add line breaks at appropriate points, add an extra indent on subsequent lines, and move the opening brace to its own line:
 
 ```swift
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
-    translateConstant: Int, comment: String) -> Bool {
+    translateConstant: Int, comment: String) -> Bool
+{
     // reticulate code goes here
 }
 ```
