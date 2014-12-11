@@ -431,6 +431,18 @@ var employees: Dictionary<Int, String>
 var faxNumber: Optional<Int>
 ```
 
+Prefer the shortcut versions of enum values.
+
+**Preferred:**
+```swift
+view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+```
+
+**Not Preferred:**
+```swift
+view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+```
+
 ## Control Flow
 
 Prefer the `for-in` style of `for` loop over the `for-condition-increment` style.
