@@ -18,6 +18,7 @@ This style guide is a work in progress aimed at readability, simplicity, and con
 * [Types](#types)
   * [Constants](#constants)
   * [Optionals](#optionals)
+  * [Tuples](#tuples)
   * [Type Inference](#type-inference)
   * [Syntactic Sugar](#syntactic-sugar)
 * [Control Flow](#control-flow)
@@ -391,6 +392,34 @@ Use optional binding when it's more convenient to unwrap once and perform multip
 if let view = self.optionalView {
     // do many things with view
 }
+```
+
+### Tuples
+
+Tuples are very useful for returning multiple values back from a function. When declaring variables for those tuple values, favor naming each variable in the tuple rather than the tuple itself.
+
+**Preferred:**
+```swift
+let (object, error) = createObject()
+```
+
+**Not Preferred:**
+```swift
+let tuple = createObject()
+let object = tuple.object
+let error = tuple.error
+```
+
+A common use for returning tuples is for factory methods that return one or more optional values and an optional error in case the thing(s) are not created properly. When doing so, the error should be the last value in the tuple.
+
+**Preferred:**
+```swift
+func createObject() -> (object: NSObject?, error: NSError?)
+```
+
+**Not Preferred:**
+```swift
+func createObject() -> (error: NSError?, object: NSObject?)
 ```
 
 ### Type Inference
