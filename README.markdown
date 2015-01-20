@@ -143,6 +143,20 @@ class app_widgetContainer {
 }
 ```
 
+Abbreviations in camelCase names should be all capitalized unless they are the first or only word of that name in which case they should be lowercase.
+
+**Preferred:**
+```swift
+let url = NSURL(string: "http://foo.bar")
+let absoluteURL = url?.absoluteURL
+```
+
+**Not Preferred:**
+```swift
+let URL = NSURL(string: "http://foo.bar")
+let absoluteUrl = url?.absoluteURL
+```
+
 For enumerated types, as per Apple's recommendation, the type name should be in the singular.
 
 **Preferred:**
